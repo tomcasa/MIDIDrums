@@ -100,8 +100,8 @@ function onMIDIInit( midi ) {
   selectMIDIOut.options.length = 0;
 
   if ((typeof(midiAccess.inputs) == "function")) {  //Old Skool MIDI inputs() code
-    var list=midiAccess.inputs();
-
+    //var list=midiAccess.inputs();
+/*
     for (var i=0; i<list.length; i++) {
       var str=list[i].name.toString();
       if (!midiIn && (str.indexOf("Controls") != -1)) {
@@ -114,6 +114,7 @@ function onMIDIInit( midi ) {
       midiIn = list[0];
     if (midiIn)
       midiIn.onmidimessage = midiMessageReceived;
+*/
 
     list=midiAccess.outputs();
 
@@ -128,20 +129,21 @@ function onMIDIInit( midi ) {
     if (!midiOut)
       midiOut = list[0];
   } else {  // new MIDIMap implementation:
-    var inputs=midiAccess.inputs.values();
+  /*
+    var inputs=null//midiAccess.inputs.values();
     for ( var input = inputs.next(); input && !input.done; input = inputs.next()) {
       input = input.value;
       var str=input.name.toString();
       var preferred = !midiIn && (str.indexOf("Controls") != -1);
 
-      selectMIDIIn.appendChild(new Option(input.name,input.id,preferred,preferred));
+      //selectMIDIIn.appendChild(new Option(input.name,input.id,preferred,preferred));
       if (preferred) {
         midiIn = input;
         midiIn.onmidimessage = midiMessageReceived;
       }
-    }
+    }*/
     if (!midiIn) {
-      midiIn = midiAccess.inputs.values().next().value;
+      midiIn = null // midiAccess.inputs.values().next().value;
       if (midiIn)
         midiIn.onmidimessage = midiMessageReceived;
     }
